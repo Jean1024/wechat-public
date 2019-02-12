@@ -15,7 +15,7 @@ exports.parseXMLAsync = function(xml){
 function formatMessage(result){
     var message = {}
     if(typeof result === 'object'){
-        var keys = Object.keys()
+        var keys = Object.keys(result)
         for (let i = 0; i < keys.length; i++) {
             const item = result[keys[i]];
             var key = keys[i]
