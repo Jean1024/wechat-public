@@ -65,7 +65,7 @@ class Wechat{
 }
 module.exports = function(opts){
     var wechat = new Wechat(opts)
-    return function *(ctx){
+    return function (ctx){
         var signature = ctx.query.signature,//微信加密签名
             timestamp = ctx.query.timestamp,//时间戳
             nonce = ctx.query.nonce,//随机数
