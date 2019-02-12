@@ -49,7 +49,7 @@ class Wechat{
         // 更新token
         var appID = this.appID
         var appScrect = this.appScrect
-        var url = api.access_token + '&appid='+appID+'&secret='+appScrect
+        var url = api.accessToken + '&appid='+appID+'&secret='+appScrect
         return new Promise((resolve, reject) => {
             request({url,json:true})
             .then(response=>{
