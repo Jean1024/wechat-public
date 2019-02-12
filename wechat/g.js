@@ -28,18 +28,18 @@ class Wechat{
         })
         .then(function(data){
             that.access_token = data.access_token
-            that.expire_in = data.expire_in
+            that.expires_in = data.expires_in
             that.saveAccessToken(data)
         })
     }
     isValidAccessToken(data){
         // 检测合法性
-        if(!data || !data.access_token || !data.expire_in){
+        if(!data || !data.access_token || !data.expires_in){
             return false
         }
-        var expire_in = data.expire_in
+        var expires_in = data.expires_in
         var now = (new Date()).getTime()
-        if(now < expire_in){
+        if(now < expires_in){
             return true
         }else{
             return false
@@ -53,12 +53,11 @@ class Wechat{
         return new Promise((resolve, reject) => {
             request({url,json:true})
             .then(response=>{
-                console.log(response)
-                var data = response[1]
+                var data = response.body
                 var now = (new Date()).getTime()
                 // 有效时间缩短20s
-                var expire_in = now + (data.expire_in - 20) * 1000
-                data.expire_in = expire_in
+                var expires_in = now + (data.expires_in - 20) * 1000
+                data.expires_in = expires_in
                 resolve(data)
             })
         })
