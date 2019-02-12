@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Jean1024/wechat-public#readme",
   "dependencies": {
+    "bluebird": "^3.5.3",
     "koa": "^2.7.0",
+    "request": "^2.88.0",
     "sha1": "^1.1.1"
   }
 }
