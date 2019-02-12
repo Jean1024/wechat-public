@@ -2,6 +2,7 @@
 const sha1 = require('sha1');
 const Wechat = require('./wechat');
 const getRowBody = require('raw-body')
+const util = require('./util')
 module.exports = function(opts){
     //微信加密
     var wechat = new Wechat(opts)
@@ -30,7 +31,10 @@ module.exports = function(opts){
                 limit: '1mb',
                 encoding: this.charset
             })
-            console.log(data.toString())
+            var content = yield util.parseXMLAsync(data)
+           
+            const message = util.formatMessage(content)
+            console.log(message)
         }
     }
 }
