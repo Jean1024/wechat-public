@@ -53,6 +53,7 @@ class Wechat{
         return new Promise((resolve, reject) => {
             request({url,json:true})
             .then(response=>{
+                console.log(response)
                 var data = response[1]
                 var now = (new Date()).getTime()
                 // 有效时间缩短20s
