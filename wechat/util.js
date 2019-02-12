@@ -37,5 +37,6 @@ function formatMessage(result){
             }
         }
     }
+    return message
 }
 exports.formatMessage = formatMessage
