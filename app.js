@@ -10,9 +10,19 @@ const config = {
     }
 }
 
-app.use(async (ctx,next) => {
-    console.log(ctx.query)
-    next()
+app.use(async (ctx) => {
+    const tocken = config.wechat.tocken
+    const signature = ctx.query.signature
+    const echostr = ctx.query.echostr
+    const timestamp = ctx.query.timestamp
+    const nonce = ctx.query.nonce
+    const str = [tocken,timestamp,nonce].sort().join('')
+    const sha = sha1(str)
+    if(sha === signature){
+        ctx.body = echostr
+    }else{
+        ctx.body = '验证失败'
+    }
 })
 
 app.listen(80, () => {
