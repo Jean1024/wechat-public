@@ -5,16 +5,15 @@ const Promise = require('bluebird');
 
 exports.parseXMLAsync = function(xml){
     return new Promise((resolve, reject) => {
-        xml2js.parseString(xml,{trim:true,function (err,content) {
+        xml2js.parseString(xml, {trim: true},function (err,content) {
             if(err) reject(err)
-            resolve(content)
-        }})
+            else resolve(content)
+        })
     })
     
 }
 function formatMessage(result){
     var message = {}
-    console.log(result)
     if(typeof result === 'object'){
         var keys = Object.keys(result)
         for (let i = 0; i < keys.length; i++) {

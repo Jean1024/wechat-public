@@ -7,8 +7,8 @@ const util = require('./libs/util.js')
 const config = {
     wechat: {
         token:"qiuzhilin",
-        appID:"wx073a992a88e1356a",
-        appScrect:"72fba66ce0195f15075451c775712496",
+        appID:"wx5e8a16fa067e5067",
+        appScrect:"73dcf94846cdad3831cf04de8baed56d",
         getAccessToken:function(){
             return util.readFileAsync(wechat_file,'utf-8')
         },
@@ -23,6 +23,6 @@ const app = new Koa()
 
 app.use(wechat(config.wechat))
 
-app.listen(80, () => {
-    console.log('App listening on port 80!');
+app.listen(3000, () => {
+    console.log('App listening on port 3000!');
 });

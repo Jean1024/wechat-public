@@ -14,7 +14,6 @@ module.exports = function(opts){
             token = opts.token;
         var str = [timestamp,token,nonce].sort().join('')
         var sha = sha1(str)
-
         if(this.method === 'GET'){
             if(sha === signature){
                 this.body = echostr
@@ -31,9 +30,13 @@ module.exports = function(opts){
                 limit: '1mb',
                 encoding: this.charset
             })
+            console.log(data)
             var content = yield util.parseXMLAsync(data)
-           
-            const message = util.formatMessage(content)
+
+            console.log(content)
+      
+            var message = util.formatMessage(content.xml)
+      
             console.log(message)
         }
     }
