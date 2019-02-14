@@ -3,10 +3,11 @@ const sha1 = require('sha1');
 const Wechat = require('./wechat');
 const getRowBody = require('raw-body')
 const util = require('./util')
-module.exports = function(opts){
+module.exports = function(opts,handler){
     //微信加密
     var wechat = new Wechat(opts)
     return function *(next){
+        const that = this
         var signature = this.query.signature,//微信加密签名
             timestamp = this.query.timestamp,//时间戳
             nonce = this.query.nonce,//随机数
@@ -30,14 +31,20 @@ module.exports = function(opts){
                 limit: '1mb',
                 encoding: this.charset
             })
-            console.log(data)
+            // console.log(data)
             var content = yield util.parseXMLAsync(data)
 
-            console.log(content)
+            // console.log(content)
       
             var message = util.formatMessage(content.xml)
       
-            console.log(message)
+            // console.log(message)
+            
+            this.weixin = message
+
+            yield handler.call(this, next)
+
+            wechat.reply.call(this)
         }
     }
 }
